@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Świat roślin</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f1f8e9;
+            color: #234d20;
+        }
+
+        header {
+            background-color: #8ed0df;
+            width: 70%;
+            margin: 25px auto;
+            padding: 20px;
+            text-align: center;
+            border: 4px solid black;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+
+        .rosliny {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            width: 90%;
+            margin: 40px auto 25px;
+        }
+
+        .roslina {
+            background-color: white;
+            border: 3px solid #333;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .roslina:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
+        }
+
+        .roslina img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .roslina h2 {
+            text-align: center;
+            margin: 15px 5px;
+            color: #286b2a;
+            font-size: 22px;
+        }
+
+        .informacje-dol {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            width: 90%;
+            margin: 0 auto 50px;
+        }
+
+        .informacje-dol > h2 {
+            grid-column: 1 / -1;
+            text-align: center;
+            background-color: #8ed0df;
+            border: 3px solid #333;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 0;
+            font-size: 25px;
+        }
+
+        .informacja {
+            background-color: white;
+            border: 3px solid #333;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            min-height: 230px;
+        }
+
+        .informacja-nazwa {
+            background-color: #e1f0d9;
+            text-align: center;
+            padding: 15px 5px;
+            font-size: 21px;
+            font-weight: bold;
+            color: #286b2a;
+            border-bottom: 2px solid #8bc48b;
+        }
+
+        .informacja-tekst {
+            padding: 18px;
+            font-size: 15px;
+            line-height: 1.7;
+            color: #365c36;
+        }
+
+        .informacja-tekst strong {
+            color: #286b2a;
+        }
+
+        .okno-informacje {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .okno {
+            background-color: white;
+            width: 70%;
+            max-width: 700px;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .okno h2 {
+            color: #267329;
+            font-size: 30px;
+        }
+
+        .okno p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .zamknij {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .zamknij:hover {
+            background-color: #388e3c;
+        }
+
+        @media (max-width: 800px) {
+
+            .rosliny {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .informacje-dol {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            header {
+                width: 85%;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .rosliny {
+                grid-template-columns: 1fr;
+            }
+
+            .informacje-dol {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                width: 80%;
+            }
+
+            .okno {
+                width: 80%;
+                padding: 20px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Świat roślin</h1>
+    </header>
+
+    <main class="rosliny">
+
+        <div class="roslina" onclick="pokazInformacje('róża')">
+
+            <img
+                src="https://images.unsplash.com/photo-1496062031456-07b8f162a322?auto=format&fit=crop&w=800&q=80"
+                alt="Róża"
+            >
+
+            <h2>🌹 Róża</h2>
+
+        </div>
+
+        <div class="roslina" onclick="pokazInformacje('słonecznik')">
+
+            <img
+                src="https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&w=800&q=80"
+                alt="Słonecznik"
+            >
+
+            <h2>🌻 Słonecznik</h2>
+
+        </div>
+
+        <div class="roslina" onclick="pokazInformacje('kaktus')">
+
+            <img
+                src="https://tse2.mm.bing.net/th/id/OIP.Vs7Cpi7IzxF822AG4BGitgAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+                alt="Kaktus"
+            >
+
+            <h2>🌵 Kaktus</h2>
+
+        </div>
+
+        <div class="roslina" onclick="pokazInformacje('lawenda')">
+
+            <img
+                src="https://images.unsplash.com/photo-1499002238440-d264edd596ec?auto=format&fit=crop&w=800&q=80"
+                alt="Lawenda"
+            >
+
+            <h2>💜 Lawenda</h2>
+
+        </div>
+
+    </main>
+
+    <section class="informacje-dol">
+
+        <h2>🌱 Informacje o roślinach</h2>
+
+        <div class="informacja">
+
+            <div class="informacja-nazwa">
+                🌹 Róża
+            </div>
+
+            <div class="informacja-tekst">
+
+                <strong>Kolor:</strong> czerwony<br>
+
+                <strong>Kwitnienie:</strong>
+                wiosna–jesień<br>
+
+                <strong>Wysokość:</strong>
+                około 1–2 m<br>
+
+                <strong>Stanowisko:</strong>
+                słoneczne<br>
+
+                <strong>Podlewanie:</strong>
+                umiarkowane<br>
+
+                <strong>Ciekawostka:</strong>
+                posiada kolce i pachnące kwiaty.
+
+            </div>
+
+        </div>
+
+        <div class="informacja">
+
+            <div class="informacja-nazwa">
+                🌻 Słonecznik
+            </div>
+
+            <div class="informacja-tekst">
+
+                <strong>Kolor:</strong> żółty<br>
+
+                <strong>Kwitnienie:</strong>
+                lato<br>
+
+                <strong>Wysokość:</strong>
+                nawet kilka metrów<br>
+
+                <strong>Stanowisko:</strong>
+                bardzo słoneczne<br>
+
+                <strong>Podlewanie:</strong>
+                regularne<br>
+
+                <strong>Ciekawostka:</strong>
+                jego nasiona są jadalne i można produkować z nich olej.
+
+            </div>
+
+        </div>
+
+        <div class="informacja">
+
+            <div class="informacja-nazwa">
+                🌵 Kaktus
+            </div>
+
+            <div class="informacja-tekst">
+
+                <strong>Środowisko:</strong>
+                suche i gorące tereny<br>
+
+                <strong>Woda:</strong>
+                magazynowana w łodydze<br>
+
+                <strong>Stanowisko:</strong>
+                bardzo słoneczne<br>
+
+                <strong>Podlewanie:</strong>
+                rzadkie<br>
+
+                <strong>Ochrona:</strong>
+                posiada kolce<br>
+
+                <strong>Ciekawostka:</strong>
+                może długo przetrwać bez wody.
+
+            </div>
+
+        </div>
+
+        <div class="informacja">
+
+            <div class="informacja-nazwa">
+                💜 Lawenda
+            </div>
+
+            <div class="informacja-tekst">
+
+                <strong>Kolor:</strong>
+                fioletowy<br>
+
+                <strong>Kwitnienie:</strong>
+                lato<br>
+
+                <strong>Wysokość:</strong>
+                około 30–90 cm<br>
+
+                <strong>Stanowisko:</strong>
+                słoneczne<br>
+
+                <strong>Zapach:</strong>
+                intensywny<br>
+
+                <strong>Ciekawostka:</strong>
+                jest często wykorzystywana w kosmetyce.
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <div class="okno-informacje" id="informacje">
+
+        <div class="okno">
+
+            <h2 id="tytul"></h2>
+
+            <p id="tekst"></p>
+
+            <button class="zamknij" onclick="zamknijInformacje()">
+                Zamknij
+            </button>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        function pokazInformacje(roslina) {
+
+            let tytul = document.getElementById("tytul");
+            let tekst = document.getElementById("tekst");
+            let okno = document.getElementById("informacje");
+
+            if (roslina === "róża") {
+
+                tytul.innerHTML = "🌹 Róża";
+
+                tekst.innerHTML =
+                    "Róża to popularna roślina ozdobna, która występuje " +
+                    "w wielu kolorach. Jej kwiaty mają piękny zapach " +
+                    "i są często wykorzystywane w ogrodach. " +
+                    "Róże mają kolce, które pomagają chronić je przed roślinożercami.";
+
+            }
+
+            else if (roslina === "słonecznik") {
+
+                tytul.innerHTML = "🌻 Słonecznik";
+
+                tekst.innerHTML =
+                    "Słonecznik to roślina jednoroczna pochodząca " +
+                    "z Ameryki Północnej. Potrzebuje dużo światła słonecznego. " +
+                    "Jego nasiona są jadalne i wykorzystuje się je między innymi " +
+                    "do produkcji oleju.";
+
+            }
+
+            else if (roslina === "kaktus") {
+
+                tytul.innerHTML = "🌵 Kaktus";
+
+                tekst.innerHTML =
+                    "Kaktusy są roślinami przystosowanymi do życia " +
+                    "w suchych warunkach. Magazynują wodę w swoich łodygach. " +
+                    "Większość kaktusów posiada kolce, które chronią je " +
+                    "przed zwierzętami.";
+
+            }
+
+            else if (roslina === "lawenda") {
+
+                tytul.innerHTML = "💜 Lawenda";
+
+                tekst.innerHTML =
+                    "Lawenda to pachnąca roślina o fioletowych kwiatach. " +
+                    "Lubi stanowiska słoneczne i dobrze przepuszczalną glebę. " +
+                    "Jej charakterystyczny zapach jest wykorzystywany " +
+                    "między innymi w kosmetyce.";
+
+            }
+
+            okno.style.display = "flex";
+        }
+
+        function zamknijInformacje() {
+
+            document.getElementById("informacje").style.display = "none";
+
+        }
+
+    </script>
+
+</body>
+</html>
